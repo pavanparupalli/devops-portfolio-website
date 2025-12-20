@@ -1,27 +1,24 @@
-name: CI/CD Pipeline - Portfolio Website
+name: CI Pipeline - Portfolio Website with Docker
 
 on:
   push:
     branches:
       - main
-permissions: 
-    contents: write
+
 jobs:
-  build-and-deploy:
+  docker-build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Validate HTML files
+      - name: Verify files
         run: |
-          echo "Validating HTML files..."
           ls -la
-          echo "Validation successful"
+          test -f Dockerfile
+          test -f index.html
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: .
+      - name: Build Docker image
+        run: |
+          docker build -t portfolio-website .
