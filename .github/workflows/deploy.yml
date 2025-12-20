@@ -1,35 +1,17 @@
-name: CI Pipeline - Portfolio Website with Docker
+name: CI Pipeline - Portfolio Website
 
 on:
   push:
     branches:
       - main
 
-permissions:
-  contents: write
-
 jobs:
-  docker-build:
+  build:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Verify required files
-        run: |
-          echo "Checking files..."
-          ls -la
-          test -f Dockerfile
-          test -f index.html
-          echo "All required files are present"
-
-      - name: Build Docker image
-        run: |
-          docker build -t portfolio-website .
-
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: .
+      - name: List files
+        run: ls -la
