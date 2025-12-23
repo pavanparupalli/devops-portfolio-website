@@ -9,6 +9,21 @@
 
 window.addEventListener('DOMContentLoaded', event => {
 
+  // Auto-generate username from email
+  const emailInput = document.getElementById('email');
+  const usernameInput = document.getElementById('username');
+  if (emailInput && usernameInput) {
+    emailInput.addEventListener('input', function () {
+      const val = emailInput.value;
+      const atIdx = val.indexOf('@');
+      if (atIdx > 0) {
+        usernameInput.value = val.substring(0, atIdx);
+      } else {
+        usernameInput.value = '';
+      }
+    });
+  }
+
     // Activate Bootstrap scrollspy on the main nav element
     const sideNav = document.body.querySelector('#sideNav');
     if (sideNav) {
@@ -153,23 +168,36 @@ window.addEventListener('DOMContentLoaded', event => {
     // --- Simple client-side auth (DEMO ONLY) ---
     // Demo credentials: admin / password
     function doLogin(username, password) {
-        return username === 'admin' && password === 'password';
+        return {
+          usernameCorrect: username === 'admin@gmail.com',
+          passwordCorrect: password === 'password',
+        };
     }
 
     const loginForm = document.getElementById('loginForm');
     if (loginForm) {
         loginForm.addEventListener('submit', function (e) {
-            e.preventDefault();
-            const u = document.getElementById('username').value.trim();
-            const p = document.getElementById('password').value;
-            const err = document.getElementById('loginError');
-            if (doLogin(u, p)) {
-                sessionStorage.setItem('isLoggedIn', 'true');
-                sessionStorage.setItem('username', u);
-                window.location.href = 'index.html';
-            } else {
-                if (err) { err.textContent = 'Invalid username or password.'; err.style.display = 'block'; }
+          e.preventDefault();
+          const u = document.getElementById('email').value.trim();
+          const p = document.getElementById('password').value;
+          const err = document.getElementById('loginError');
+          const result = doLogin(u, p);
+          if (result.usernameCorrect && result.passwordCorrect) {
+            sessionStorage.setItem('isLoggedIn', 'true');
+            sessionStorage.setItem('username', u);
+            window.location.href = 'index.html';
+          } else {
+            if (err) {
+              if (!result.usernameCorrect) {
+                err.textContent = 'Username is incorrect.';
+              } else if (!result.passwordCorrect) {
+                err.textContent = 'Password is incorrect.';
+              } else {
+                err.textContent = 'Invalid username or password.';
+              }
+              err.style.display = 'block';
             }
+          }
         });
     }
 
