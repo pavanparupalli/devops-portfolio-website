@@ -643,14 +643,14 @@ progress {
   margin-left: auto;
 }
 
-@media (min-width: 576px) {
-  .container-sm, .container {
-    max-width: 540px;
-  }
-}
-@media (min-width: 768px) {
-  .container-md, .container-sm, .container {
-    max-width: 720px;
+@media (min-width: 992px) {
+  #sideNav .navbar-brand .img-profile {
+    width: 180px;
+    height: 220px;
+    max-width: none;
+    max-height: none;
+    border-radius: 50%;
+    object-fit: cover;
   }
 }
 @media (min-width: 992px) {
