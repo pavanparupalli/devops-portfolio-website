@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Login - Pavan Parupalli</title>
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="./css/login.css">
+  </head>
+  <body>
+    <main class="login-container">
+      <div class="login-card">
+        <h1>Welcome 👋</h1>
+        <p class="lead">Please sign in to view the resume.</p>
+        <form id="loginForm" novalidate>
+          <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input id="username" name="username" class="form-control" type="text" placeholder="admin" required>
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input id="password" name="password" class="form-control" type="password" placeholder="password" required>
+          </div>
+          <div id="loginError" class="text-danger" style="display:none;margin-bottom:10px;"></div>
+          <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-primary">Sign in</button>
+            <a class="btn btn-outline-secondary" href="index.html">Preview (no auth)</a>
+          </div>
+        </form>
+        <p class="mt-3 small">Demo credentials: <code>admin</code> / <code>password</code></p>
+      </div>
+    </main>
+
+    <script src="./js/scripts.js"></script>
+  </body>
+</html>

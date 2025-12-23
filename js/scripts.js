@@ -150,6 +150,38 @@ window.addEventListener('DOMContentLoaded', event => {
         });
     }
 
+    // --- Simple client-side auth (DEMO ONLY) ---
+    // Demo credentials: admin / password
+    function doLogin(username, password) {
+        return username === 'admin' && password === 'password';
+    }
+
+    const loginForm = document.getElementById('loginForm');
+    if (loginForm) {
+        loginForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            const u = document.getElementById('username').value.trim();
+            const p = document.getElementById('password').value;
+            const err = document.getElementById('loginError');
+            if (doLogin(u, p)) {
+                sessionStorage.setItem('isLoggedIn', 'true');
+                sessionStorage.setItem('username', u);
+                window.location.href = 'index.html';
+            } else {
+                if (err) { err.textContent = 'Invalid username or password.'; err.style.display = 'block'; }
+            }
+        });
+    }
+
+    const logoutBtn = document.getElementById('logoutBtn');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', function () {
+            sessionStorage.removeItem('isLoggedIn');
+            sessionStorage.removeItem('username');
+            window.location.href = 'login.html';
+        });
+    }
+
 });
 
 /* Snowfall background script */
