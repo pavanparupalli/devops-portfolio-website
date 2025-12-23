@@ -2,21 +2,29 @@
 <html lang="en">
 <head>
         <style>
+                    /* Make Gmail address input smaller */
+                    #email-section input[type="email"] {
+                        max-width: 100%;
+                        width: 100%;
+                        margin-left: 0;
+                        margin-right: 0;
+                        display: block;
+                    }
             body {
                 min-height: 100vh;
                 background: linear-gradient(135deg, #e0e7ff 0%, #f8fafc 100%);
             }
             .signup-container {
-                max-width: 420px;
+                max-width: 600px;
                 margin: 48px auto;
                 background: #fff;
-                border-radius: 18px;
-                box-shadow: 0 8px 32px rgba(60,60,120,0.13);
-                padding: 2.7rem 2rem 2rem 2rem;
+                border-radius: 22px;
+                box-shadow: 0 12px 40px rgba(60,60,120,0.13);
+                padding: 3.5rem 3rem 3rem 3rem;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
-                gap: 1.2rem;
+                gap: 1.7rem;
             }
             .signup-container h2 {
                 margin-bottom: 0.5rem;

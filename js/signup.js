@@ -2,6 +2,16 @@
 // Simulate OTP sending and verification for Gmail signup
 
 document.addEventListener('DOMContentLoaded', function() {
+        // Pressing Enter in the OTP field triggers Verify OTP
+        const otpInputField = document.getElementById('otp');
+        if (otpInputField) {
+            otpInputField.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    verifyOtpBtn.click();
+                }
+            });
+        }
     const sendOtpBtn = document.getElementById('send-otp-btn');
     const verifyOtpBtn = document.getElementById('verify-otp-btn');
     const emailInput = document.getElementById('email');
