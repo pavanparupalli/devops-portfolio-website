@@ -8,31 +8,36 @@
     <link rel="stylesheet" href="./css/login.css">
   </head>
   <body>
-    <main class="login-container">
-      <div class="login-card">
-        <h1>Welcome 👋</h1>
-        <p class="lead">Please sign in to view the resume.</p>
-        <form id="loginForm" novalidate>
-          <!-- Username field removed -->
-          <div class="mb-3">
-            <label for="email" class="form-label">Username</label>
-            <input id="email" name="email" class="form-control" type="email" placeholder="admin@gmail.com" required>
-          </div>
-          <div class="mb-3">
-            <label for="password" class="form-label">Password</label>
-            <input id="password" name="password" class="form-control" type="password" placeholder="password" required>
-          </div>
-          <div id="loginError" class="text-danger" style="display:none;margin-bottom:10px;"></div>
-          <div class="d-flex gap-2">
-            <button type="submit" class="btn btn-primary">Sign in</button>
-            <button type="button" class="btn btn-secondary" id="signupBtn">Sign up</button>
-          </div>
-          <div class="d-flex gap-2 mt-2">
-            <button type="button" class="btn btn-link p-0" id="forgotPasswordBtn">Forgot Password?</button>
-            <button type="button" class="btn btn-link p-0" id="forgotUsernameBtn">Forgot Username?</button>
-          </div>
-        </form>
-        <p class="mt-3 small">Demo credentials: <code>admin@gmail.com</code> / <code>password</code></p>
+
+    <main class="login-container full-page-flex">
+      <div class="login-image-half">
+        <img src="./assets/img/Opening_page.jpg" alt="Profile" />
+      </div>
+      <div class="login-card-half">
+        <div class="login-card">
+          <h1 style="font-size:2rem;">Welcome 👋</h1>
+          <p class="lead">Please sign in to view the resume.</p>
+          <form id="loginForm" novalidate>
+            <div class="mb-3">
+              <label for="email" class="form-label">Username</label>
+              <input id="email" name="email" class="form-control" type="email" placeholder="admin@gmail.com" required>
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input id="password" name="password" class="form-control" type="password" placeholder="password" required>
+            </div>
+            <div id="loginError" class="text-danger" style="display:none;margin-bottom:10px;"></div>
+            <div class="d-flex gap-2">
+              <button type="submit" class="btn btn-primary">Sign in</button>
+              <button type="button" class="btn btn-secondary" id="signupBtn">Sign up</button>
+            </div>
+            <div class="d-flex gap-2 mt-2">
+              <button type="button" class="btn btn-link p-0" id="forgotPasswordBtn">Forgot Password?</button>
+              <button type="button" class="btn btn-link p-0" id="forgotUsernameBtn">Forgot Username?</button>
+            </div>
+          </form>
+          <p class="mt-3 small">Demo credentials: <code>admin@gmail.com</code> / <code>password</code></p>
+        </div>
       </div>
     </main>
 
