@@ -10,6 +10,14 @@ document.addEventListener('DOMContentLoaded', function() {
     const signupForm = document.getElementById('signup-form');
     const signupMessage = document.getElementById('signup-message');
 
+    // Pressing Enter in the email field triggers Send OTP
+    emailInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            sendOtpBtn.click();
+        }
+    });
+
     let generatedOtp = '';
 
     sendOtpBtn.addEventListener('click', function() {
@@ -45,16 +53,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     signupForm.addEventListener('submit', function(e) {
         e.preventDefault();
-        // Prevent submission if email is invalid or not verified
+        // Prevent submission if email is invalid or does not exist
         const email = emailInput.value.trim();
         const invalidEmails = ['wrong@gmail.com', 'invalid@gmail.com', 'test@notgmail.com'];
         if (!email.match(/[a-zA-Z0-9._%+-]+@gmail\.com$/) || invalidEmails.includes(email)) {
             signupMessage.textContent = 'Incorrect email Address';
-            signupMessage.style.color = 'red';
-            return;
-        }
-        if (!emailInput.readOnly) { // OTP not sent/verified
-            signupMessage.textContent = 'Please verify your email address first.';
             signupMessage.style.color = 'red';
             return;
         }
