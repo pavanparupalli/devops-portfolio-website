@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="css/login.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #e0e7ff 0%, #f8fafc 100%);
+            min-height: 100vh;
+        }
+        .signup-container {
+            max-width: 400px;
+            margin: 48px auto;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(60,60,120,0.12);
+            padding: 2.5rem 2rem 2rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+        .signup-container h2 {
+            margin-bottom: 0.5rem;
+            color: #3b3b6d;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        #signup-form {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+        #signup-form label {
+            font-weight: 500;
+            color: #4b5563;
+            margin-bottom: 0.25rem;
+        }
+        #signup-form input[type="email"],
+        #signup-form input[type="text"],
+        #signup-form input[type="password"] {
+            width: 100%;
+            padding: 0.7rem 1rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 1rem;
+            background: #f1f5f9;
+            transition: border 0.2s;
+        }
+        #signup-form input:focus {
+            border: 1.5px solid #6366f1;
+            outline: none;
+            background: #fff;
+        }
+        #signup-form button[type="button"],
+        #signup-form button[type="submit"] {
+            background: linear-gradient(90deg, #6366f1 0%, #3b82f6 100%);
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 0.7rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 0.5rem;
+            transition: background 0.2s, box-shadow 0.2s;
+            box-shadow: 0 2px 8px rgba(99,102,241,0.08);
+        }
+        #signup-form button:disabled {
+            background: #c7d2fe;
+            color: #6b7280;
+            cursor: not-allowed;
+        }
+        #signup-message {
+            min-height: 1.5em;
+            margin-top: 0.5rem;
+            font-size: 1rem;
+            text-align: center;
+        }
+        .signup-container p {
+            margin-top: 1.5rem;
+            font-size: 0.97rem;
+            color: #64748b;
+        }
+        .signup-container a {
+            color: #6366f1;
+            text-decoration: underline;
+            font-weight: 500;
+        }
+        /* Responsive */
+        @media (max-width: 500px) {
+            .signup-container {
+                padding: 1.2rem 0.5rem 1.5rem 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="signup-container">
+        <h2>Sign Up</h2>
+        <form id="signup-form" autocomplete="off">
+            <div id="email-section">
+                <label for="email">Gmail Address:</label>
+                <input type="email" id="email" name="email" required pattern="[a-zA-Z0-9._%+-]+@gmail\.com$" placeholder="Enter your Gmail address">
+                <button type="button" id="send-otp-btn">Send OTP</button>
+            </div>
+            <div id="otp-section" style="display:none;">
+                <label for="otp">Enter OTP:</label>
+                <input type="text" id="otp" name="otp" maxlength="6" placeholder="Enter OTP">
+                <button type="button" id="verify-otp-btn">Verify OTP</button>
+            </div>
+            <div id="password-section" style="display:none;">
+                <label for="password">Choose Password:</label>
+                <input type="password" id="password" name="password" placeholder="Password">
+                <label for="confirm-password">Confirm Password:</label>
+                <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm Password">
+                <button type="submit">Sign Up</button>
+            </div>
+        </form>
+        <div id="signup-message"></div>
+        <p>Already have an account? <a href="login.html">Login here</a></p>
+    </div>
+    <script src="js/signup.js"></script>
+</body>
+</html>
