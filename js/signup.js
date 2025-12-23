@@ -14,8 +14,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     sendOtpBtn.addEventListener('click', function() {
         const email = emailInput.value.trim();
-        if (!email.match(/[a-zA-Z0-9._%+-]+@gmail\.com$/)) {
-            signupMessage.textContent = 'Please enter a valid Gmail address.';
+        // Simulate a list of non-existent/invalid emails for demo
+        const invalidEmails = ['wrong@gmail.com', 'invalid@gmail.com', 'test@notgmail.com'];
+        if (!email.match(/[a-zA-Z0-9._%+-]+@gmail\.com$/) || invalidEmails.includes(email)) {
+            signupMessage.textContent = 'Incorrect email Address';
             signupMessage.style.color = 'red';
             return;
         }
@@ -43,6 +45,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
     signupForm.addEventListener('submit', function(e) {
         e.preventDefault();
+        // Prevent submission if email is invalid or not verified
+        const email = emailInput.value.trim();
+        const invalidEmails = ['wrong@gmail.com', 'invalid@gmail.com', 'test@notgmail.com'];
+        if (!email.match(/[a-zA-Z0-9._%+-]+@gmail\.com$/) || invalidEmails.includes(email)) {
+            signupMessage.textContent = 'Incorrect email Address';
+            signupMessage.style.color = 'red';
+            return;
+        }
+        if (!emailInput.readOnly) { // OTP not sent/verified
+            signupMessage.textContent = 'Please verify your email address first.';
+            signupMessage.style.color = 'red';
+            return;
+        }
         const password = document.getElementById('password').value;
         const confirmPassword = document.getElementById('confirm-password').value;
         if (password.length < 6) {
