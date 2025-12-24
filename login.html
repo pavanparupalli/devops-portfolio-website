@@ -9,6 +9,43 @@
     <link rel="stylesheet" href="./css/login.css">
   </head>
   <body>
+      <!-- Forgot Username Modal (EmailJS) -->
+      <div class="modal" id="forgotUsernameModal" tabindex="-1" style="display:none;position:fixed;z-index:2000;left:0;top:0;width:100vw;height:100vh;background:rgba(0,0,0,0.4);align-items:center;justify-content:center;">
+        <div style="background:#fff;padding:2rem 1.5rem;border-radius:10px;max-width:350px;width:100%;box-shadow:0 8px 32px rgba(60,60,120,0.13);position:relative;">
+          <button id="closeForgotUsernameModal" style="position:absolute;top:8px;right:12px;background:none;border:none;font-size:1.2rem;cursor:pointer;">&times;</button>
+          <h5>Forgot Username</h5>
+          <form id="forgotUsernameForm" autocomplete="off">
+            <div style="margin-bottom:1rem;">
+              <input type="email" id="forgotUsernameEmail" placeholder="Enter your Gmail address" required style="width:100%;padding:0.6rem 1rem;border-radius:6px;border:1.5px solid #cbd5e1;">
+            </div>
+            <div id="forgotUsernameMsg" style="min-height:1.2em;margin-bottom:0.5rem;font-size:0.97rem;"></div>
+            <button type="submit" id="sendForgotUsernameBtn" style="width:100%;" class="btn btn-primary">Send Username</button>
+          </form>
+        </div>
+      </div>
+  <!-- EmailJS SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+    <!-- Forgot Password Modal (EmailJS) -->
+    <div class="modal" id="forgotPasswordModal" tabindex="-1" style="display:none;position:fixed;z-index:2000;left:0;top:0;width:100vw;height:100vh;background:rgba(0,0,0,0.4);align-items:center;justify-content:center;">
+      <div style="background:#fff;padding:2rem 1.5rem;border-radius:10px;max-width:350px;width:100%;box-shadow:0 8px 32px rgba(60,60,120,0.13);position:relative;">
+        <button id="closeForgotModal" style="position:absolute;top:8px;right:12px;background:none;border:none;font-size:1.2rem;cursor:pointer;">&times;</button>
+        <h5>Forgot Password</h5>
+        <form id="forgotPasswordForm" autocomplete="off">
+          <div style="margin-bottom:1rem;">
+            <input type="email" id="forgotEmail" placeholder="Enter your Gmail address" required style="width:100%;padding:0.6rem 1rem;border-radius:6px;border:1.5px solid #cbd5e1;">
+          </div>
+          <div id="forgotMsg" style="min-height:1.2em;margin-bottom:0.5rem;font-size:0.97rem;"></div>
+          <button type="submit" id="sendForgotBtn" style="width:100%;" class="btn btn-primary">Send Password</button>
+            <script>
+              // Initialize EmailJS (replace with your user ID)
+              (function(){
+                emailjs.init('YOUR_EMAILJS_USER_ID');
+              })();
+            </script>
+        </form>
+      </div>
+    </div>
 
     <main class="login-container full-page-flex">
       <div class="login-image-half">

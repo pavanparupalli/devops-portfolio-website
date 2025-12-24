@@ -8,185 +8,175 @@
 // 
 
 window.addEventListener('DOMContentLoaded', event => {
+  // Forgot Username Modal Logic
+  const forgotUsernameBtn = document.getElementById('forgotUsernameBtn');
+  const forgotUsernameModal = document.getElementById('forgotUsernameModal');
+  const closeForgotUsernameModal = document.getElementById('closeForgotUsernameModal');
+  const forgotUsernameForm = document.getElementById('forgotUsernameForm');
+  const forgotUsernameEmail = document.getElementById('forgotUsernameEmail');
+  const forgotUsernameMsg = document.getElementById('forgotUsernameMsg');
 
-  // Auto-generate username from email
-  const emailInput = document.getElementById('email');
-  const usernameInput = document.getElementById('username');
-  if (emailInput && usernameInput) {
-    emailInput.addEventListener('input', function () {
-      const val = emailInput.value;
-      const atIdx = val.indexOf('@');
-      if (atIdx > 0) {
-        usernameInput.value = val.substring(0, atIdx);
-      } else {
-        usernameInput.value = '';
+  if (forgotUsernameBtn && forgotUsernameModal) {
+    forgotUsernameBtn.onclick = () => {
+      forgotUsernameModal.style.display = 'flex';
+      forgotUsernameForm.reset();
+      forgotUsernameMsg.textContent = '';
+    };
+    closeForgotUsernameModal.onclick = () => {
+      forgotUsernameModal.style.display = 'none';
+    };
+    forgotUsernameForm.onsubmit = (e) => {
+      e.preventDefault();
+      const email = forgotUsernameEmail.value.trim();
+      if (!email.match(/[a-zA-Z0-9._%+-]+@gmail\.com$/)) {
+        forgotUsernameMsg.textContent = 'Please enter a valid Gmail address.';
+        forgotUsernameMsg.style.color = 'red';
+        return;
       }
-    });
+      // Send username to email using EmailJS
+      forgotUsernameMsg.textContent = 'Sending username...';
+      forgotUsernameMsg.style.color = 'black';
+      // Replace with your actual username logic
+      const username = 'admin@gmail.com'; // Demo username, replace as needed
+      emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', {
+        to_email: email,
+        message: `Your username is: ${username}`
+      })
+      .then(function(response) {
+        forgotUsernameMsg.textContent = `Your username has been sent to ${email}`;
+        forgotUsernameMsg.style.color = 'green';
+        setTimeout(() => { forgotUsernameModal.style.display = 'none'; }, 1500);
+      }, function(error) {
+        forgotUsernameMsg.textContent = 'Failed to send email. Please try again.';
+        forgotUsernameMsg.style.color = 'red';
+      });
+    };
   }
 
-    // Activate Bootstrap scrollspy on the main nav element
-    const sideNav = document.body.querySelector('#sideNav');
-    if (sideNav) {
-        new bootstrap.ScrollSpy(document.body, {
-            target: '#sideNav',
-            rootMargin: '0px 0px -40%',
-        });
+  // Simple Forgot Password Modal Logic
+  const forgotPasswordBtn = document.getElementById('forgotPasswordBtn');
+  const forgotPasswordModal = document.getElementById('forgotPasswordModal');
+  const closeForgotModal = document.getElementById('closeForgotModal');
+  const forgotPasswordForm = document.getElementById('forgotPasswordForm');
+  const forgotEmail = document.getElementById('forgotEmail');
+  const forgotMsg = document.getElementById('forgotMsg');
+
+  if (forgotPasswordBtn && forgotPasswordModal) {
+    forgotPasswordBtn.onclick = () => {
+      forgotPasswordModal.style.display = 'flex';
+      forgotPasswordForm.reset();
+      forgotMsg.textContent = '';
     };
+    closeForgotModal.onclick = () => {
+      forgotPasswordModal.style.display = 'none';
+    };
+    forgotPasswordForm.onsubmit = (e) => {
+      e.preventDefault();
+      const email = forgotEmail.value.trim();
+      if (!email.match(/[a-zA-Z0-9._%+-]+@gmail\.com$/)) {
+        forgotMsg.textContent = 'Please enter a valid Gmail address.';
+        forgotMsg.style.color = 'red';
+        return;
+      }
+      // Send password to email using EmailJS
+      forgotMsg.textContent = 'Sending password...';
+      forgotMsg.style.color = 'black';
+      // Replace with your actual password logic
+      const password = 'password'; // Demo password, replace as needed
+      emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', {
+        to_email: email,
+        message: `Your password is: ${password}`
+      })
+      .then(function(response) {
+        forgotMsg.textContent = `Your password has been sent to ${email}`;
+        forgotMsg.style.color = 'green';
+        setTimeout(() => { forgotPasswordModal.style.display = 'none'; }, 1500);
+      }, function(error) {
+        forgotMsg.textContent = 'Failed to send email. Please try again.';
+        forgotMsg.style.color = 'red';
+      });
+    };
+  }
 
-    // Collapse responsive navbar when toggler is visible
-    const navbarToggler = document.body.querySelector('.navbar-toggler');
-    const responsiveNavItems = [].slice.call(
-        document.querySelectorAll('#navbarResponsive .nav-link')
-    );
-    responsiveNavItems.map(function (responsiveNavItem) {
-        responsiveNavItem.addEventListener('click', () => {
-            if (window.getComputedStyle(navbarToggler).display !== 'none') {
-                navbarToggler.click();
-            }
-        });
-    });
+  // Forgot Password Modal Logic
+  const forgotPasswordBtn = document.getElementById('forgotPasswordBtn');
+  const forgotPasswordModal = document.getElementById('forgotPasswordModal');
+  const closeForgotModal = document.getElementById('closeForgotModal');
+  const forgotPasswordForm = document.getElementById('forgotPasswordForm');
+  const forgotEmail = document.getElementById('forgotEmail');
+  const forgotOtp = document.getElementById('forgotOtp');
+  const newPassword = document.getElementById('newPassword');
+  const confirmNewPassword = document.getElementById('confirmNewPassword');
+  const sendForgotOtpBtn = document.getElementById('sendForgotOtpBtn');
+  const verifyForgotOtpBtn = document.getElementById('verifyForgotOtpBtn');
+  const resetPasswordBtn = document.getElementById('resetPasswordBtn');
+  const otpSection = document.getElementById('otpSection');
+  const newPasswordSection = document.getElementById('newPasswordSection');
+  const forgotMsg = document.getElementById('forgotMsg');
+  let forgotGeneratedOtp = '';
 
-
-    // Download resume button - attempt direct PDF download, fallback to print dialog
-    const downloadBtn = document.getElementById('downloadResumeBtn');
-    if (downloadBtn) {
-        downloadBtn.addEventListener('click', async () => {
-            // 0) Try to fetch a named PDF first (several filename variants)
-            const pdfCandidates = [
-                'assets/Pavan%20Parupalli%20Resume.pdf',
-                'assets/Pavan_Parupalli_Resume.pdf',
-                'assets/PavanParupalli_Resume.pdf',
-                'assets/Resume.pdf'
-            ];
-            for (const pdfCandidate of pdfCandidates) {
-                try {
-                    const r = await fetch(pdfCandidate, { cache: 'no-store' });
-                    if (r.ok) {
-                        const blob = await r.blob();
-                        const url = URL.createObjectURL(blob);
-                        const a = document.createElement('a');
-                        a.href = url;
-                        // Use a friendly filename when saving
-                        a.download = 'Pavan Parupalli Resume.pdf';
-                        document.body.appendChild(a);
-                        a.click();
-                        a.remove();
-                        URL.revokeObjectURL(url);
-                        return;
-                    }
-                } catch (err) {
-                    // ignore and try next candidate
-                }
-            }
-
-            // 1) Try to fetch a specific Untitled HTML and create a PDF from it
-            const htmlUrl = 'assets/Untitled.html';
-            try {
-                const resp = await fetch(htmlUrl, { cache: 'no-store' });
-                if (resp.ok) {
-                    const htmlText = await resp.text();
-                    // Create a temporary container for the fetched HTML
-                    const container = document.createElement('div');
-                    container.style.position = 'relative';
-                    container.style.width = '100%';
-                    container.style.background = '#fff';
-                    container.style.padding = '20px';
-                    container.style.boxSizing = 'border-box';
-                    container.innerHTML = htmlText;
-                    container.style.display = 'block';
-                    container.id = 'tmp-untitled-export';
-                    document.body.appendChild(container);
-
-                    if (window.html2pdf) {
-                        try {
-                            const opt = {
-                                margin:       0.5,
-                                filename:     'Resume-from-Untitled.pdf',
-                                image:        { type: 'jpeg', quality: 0.98 },
-                                html2canvas:  { scale: 2 },
-                                jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
-                            };
-                            await html2pdf().set(opt).from(container).save();
-                            container.remove();
-                            return;
-                        } catch (err) {
-                            console.error('html2pdf export failed:', err);
-                            container.remove();
-                        }
-                    } else {
-                        // If html2pdf missing, try print the container
-                        window.print();
-                        container.remove();
-                        return;
-                    }
-                }
-            } catch (e) {
-                // ignore and continue to other fallbacks
-            }
-
-            // 2) Previous behavior: try to download an existing PDF
-            const pdfUrl = 'assets/Resume.pdf';
-            try {
-                const resp2 = await fetch(pdfUrl, { cache: 'no-store' });
-                if (resp2.ok) {
-                    const blob = await resp2.blob();
-                    const url = URL.createObjectURL(blob);
-                    const a = document.createElement('a');
-                    a.href = url;
-                    a.download = 'Resume.pdf';
-                    document.body.appendChild(a);
-                    a.click();
-                    a.remove();
-                    URL.revokeObjectURL(url);
-                    return;
-                }
-            } catch (e) {
-                // ignore and fallback
-            }
-
-            // 3) Final fallback: export current page with html2pdf or open print dialog
-            if (window.html2pdf) {
-                try {
-                    const element = document.querySelector('.container-fluid') || document.body;
-                    const opt = {
-                        margin:       0.5,
-                        filename:     'Resume.pdf',
-                        image:        { type: 'jpeg', quality: 0.98 },
-                        html2canvas:  { scale: 2 },
-                        jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
-                    };
-                    await html2pdf().set(opt).from(element).save();
-                    return;
-                } catch (err) {
-                    // fall through to print dialog
-                }
-            }
-            window.print();
-        });
+  if (forgotPasswordBtn && forgotPasswordModal) {
+    function handleSendForgotOtp() {
+      const email = forgotEmail.value.trim();
+      if (!email.match(/[a-zA-Z0-9._%+-]+@gmail\.com$/)) {
+        forgotMsg.textContent = 'Please enter a valid Gmail address.';
+        forgotMsg.style.color = 'red';
+        return;
+      }
+      forgotGeneratedOtp = Math.floor(100000 + Math.random() * 900000).toString();
+      forgotMsg.textContent = `OTP sent to ${email} (Simulated: ${forgotGeneratedOtp})`;
+      forgotMsg.style.color = 'green';
+      otpSection.style.display = '';
+      sendForgotOtpBtn.style.display = 'none';
+      verifyForgotOtpBtn.style.display = '';
     }
 
-    // --- Simple client-side auth (DEMO ONLY) ---
-    // Demo credentials: admin / password
-    function doLogin(username, password) {
-        return {
-          usernameCorrect: username === 'admin@gmail.com',
-          passwordCorrect: password === 'password',
-        };
-    }
+    forgotPasswordBtn.onclick = () => {
+      forgotPasswordModal.style.display = 'flex';
+      forgotPasswordForm.reset();
+      otpSection.style.display = 'none';
+      newPasswordSection.style.display = 'none';
+      sendForgotOtpBtn.style.display = '';
+      verifyForgotOtpBtn.style.display = 'none';
+      resetPasswordBtn.style.display = 'none';
+      forgotMsg.textContent = '';
+    };
+    closeForgotModal.onclick = () => {
+      forgotPasswordModal.style.display = 'none';
+    };
+    sendForgotOtpBtn.onclick = handleSendForgotOtp;
 
-    const loginForm = document.getElementById('loginForm');
-    if (loginForm) {
-        loginForm.addEventListener('submit', function (e) {
-          e.preventDefault();
-          const u = document.getElementById('email').value.trim();
-          const p = document.getElementById('password').value;
-          const err = document.getElementById('loginError');
-          const result = doLogin(u, p);
-          if (result.usernameCorrect && result.passwordCorrect) {
-            sessionStorage.setItem('isLoggedIn', 'true');
-            sessionStorage.setItem('username', u);
-            window.location.href = 'index.html';
-          } else {
+    // Simple Forgot Password Modal Logic
+    const forgotPasswordBtn = document.getElementById('forgotPasswordBtn');
+    const forgotPasswordModal = document.getElementById('forgotPasswordModal');
+    const closeForgotModal = document.getElementById('closeForgotModal');
+    const forgotPasswordForm = document.getElementById('forgotPasswordForm');
+    const forgotEmail = document.getElementById('forgotEmail');
+    const forgotMsg = document.getElementById('forgotMsg');
+
+    if (forgotPasswordBtn && forgotPasswordModal) {
+      forgotPasswordBtn.onclick = () => {
+        forgotPasswordModal.style.display = 'flex';
+        forgotPasswordForm.reset();
+        forgotMsg.textContent = '';
+      };
+      closeForgotModal.onclick = () => {
+        forgotPasswordModal.style.display = 'none';
+      };
+      forgotPasswordForm.onsubmit = (e) => {
+        e.preventDefault();
+        const email = forgotEmail.value.trim();
+        if (!email.match(/[a-zA-Z0-9._%+-]+@gmail\.com$/)) {
+          forgotMsg.textContent = 'Please enter a valid Gmail address.';
+          forgotMsg.style.color = 'red';
+          return;
+        }
+        // Simulate sending password to email
+        forgotMsg.textContent = `Your password has been sent to ${email} (Simulated)`;
+        forgotMsg.style.color = 'green';
+        setTimeout(() => { forgotPasswordModal.style.display = 'none'; }, 1500);
+      };
+    }
             if (err) {
               if (!result.usernameCorrect) {
                 err.textContent = 'Username is incorrect.';
