@@ -1,24 +1,28 @@
-// login.js
-
 document.addEventListener("DOMContentLoaded", () => {
   const loginForm = document.getElementById("loginForm");
+  const errorBox = document.getElementById("loginError");
+
+  const DEMO_EMAIL = "admin@gmail.com";
+  const DEMO_PASSWORD = "Pavan@123!";
 
   loginForm.addEventListener("submit", (e) => {
-    e.preventDefault(); // stop page refresh
+    e.preventDefault();
 
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
+    const email = document.getElementById("email").value.trim().toLowerCase();
+    const password = document.getElementById("password").value.trim();
 
-    // Simple frontend validation (demo purpose)
-    if (email === "" || password === "") {
-      alert("Please enter email and password");
+    if (!email || !password) {
+      errorBox.style.display = "block";
+      errorBox.textContent = "Please enter email and password";
       return;
     }
 
-    // Simulated login success
-    alert("Login successful!");
-
-    // Redirect to portfolio home page
-    window.location.href = "index.html";
+    if (email === DEMO_EMAIL.toLowerCase() && password === DEMO_PASSWORD) {
+      sessionStorage.setItem('isLoggedIn', 'true');
+      window.location.href = "/frontend/";
+    } else {
+      errorBox.style.display = "block";
+      errorBox.textContent = "Check username or password";
+    }
   });
 });

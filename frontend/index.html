@@ -27,6 +27,16 @@
         <!-- Logout Button Top Right -->
         <button id="logoutBtn" class="btn btn-danger position-fixed" style="top: 18px; right: 24px; z-index: 1050;">Logout</button>
         <script>
+                            // Logout button: clear session and redirect to login page
+                            document.addEventListener('DOMContentLoaded', function() {
+                                var logoutBtn = document.getElementById('logoutBtn');
+                                if (logoutBtn) {
+                                    logoutBtn.addEventListener('click', function() {
+                                        sessionStorage.removeItem('isLoggedIn');
+                                        window.location.href = 'login.html';
+                                    });
+                                }
+                            });
             // Protect page: redirect to login page if not authenticated
             console.log('Auth check:', sessionStorage.getItem('isLoggedIn'));
             if (!sessionStorage.getItem('isLoggedIn')) {
@@ -82,8 +92,7 @@
                     </div>
                     
                     <div class="mt-5 pt-5">
-                        <button id="downloadResumeBtn" class="btn btn-primary me-2">Download Resume (PDF)</button>
-                        <a href="login.html" class="btn btn-success ms-2">Sign In</a>
+                        <a id="downloadResumeBtn" class="btn btn-primary me-2" href="./assets/Pavan%20Parupalli%20Resume.pdf" download>Download Resume (PDF)</a>
                     </div>
                 </div>
             </section>
