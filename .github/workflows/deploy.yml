@@ -39,6 +39,6 @@ jobs:
             sudo docker rm portfolio || true
             sudo docker run -d \
               --name portfolio \
-              -p 80:80 \
+              -p 8080:80 \
               --restart always \
               pavanparupalli/portfolio-website:latest
