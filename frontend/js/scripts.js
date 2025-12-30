@@ -8,6 +8,35 @@
 // 
 
 window.addEventListener('DOMContentLoaded', event => {
+  // Login form handler
+  const loginForm = document.getElementById('loginForm');
+  const loginError = document.getElementById('loginError');
+  if (loginForm) {
+    loginForm.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+      loginError.style.display = 'none';
+      try {
+        const response = await fetch('/api/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
+        const result = await response.json();
+        if (response.ok) {
+          sessionStorage.setItem('isLoggedIn', 'true');
+          window.location.href = 'index.html';
+        } else {
+          loginError.textContent = result.error || 'Login failed.';
+          loginError.style.display = 'block';
+        }
+      } catch (err) {
+        loginError.textContent = 'Network error. Please try again.';
+        loginError.style.display = 'block';
+      }
+    });
+  }
 
     // Login form handler
     const loginForm = document.getElementById('loginForm');

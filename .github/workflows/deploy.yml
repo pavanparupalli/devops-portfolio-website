@@ -21,7 +21,7 @@ jobs:
 
       - name: Build and push Docker image
         run: |
-          docker build -t pavanparupalli/portfolio-website:latest .
+          docker build -t pavanparupalli/portfolio-website:latest ./frontend
           docker push pavanparupalli/portfolio-website:latest
 
       - name: Deploy to EC2 via SSH

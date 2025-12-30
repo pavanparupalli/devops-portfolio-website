@@ -28,8 +28,12 @@
         <button id="logoutBtn" class="btn btn-danger position-fixed" style="top: 18px; right: 24px; z-index: 1050;">Logout</button>
         <script>
             // Protect page: redirect to login page if not authenticated
+            console.log('Auth check:', sessionStorage.getItem('isLoggedIn'));
             if (!sessionStorage.getItem('isLoggedIn')) {
+                console.log('Redirecting to login.html');
                 window.location.href = 'login.html';
+            } else {
+                console.log('User is authenticated, showing index page');
             }
         </script>
         <canvas id="snowCanvas" aria-hidden="true"></canvas>
