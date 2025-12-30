@@ -33,13 +33,11 @@ jobs:
           script: |
             echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
 
-            docker pull pavanparupalli/portfolio-website:latest
-
-            docker stop portfolio || true
-            docker rm portfolio || true
-
-            docker run -d \
-              --name portfolio \
-              -p 80:80 \
-              --restart always \
-              pavanparupalli/portfolio-website:latest
+            sudo docker pull pavanparupalli/portfolio-website:latest
+sudo docker stop portfolio || true
+sudo docker rm portfolio || true
+sudo docker run -d \
+  --name portfolio \
+  -p 80:80 \
+  --restart always \
+  pavanparupalli/portfolio-website:latest
